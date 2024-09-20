@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "product-balance"
+		},
+		{
+			"path": "action-history"
+		},
+		{
+			"path": "user-handler"
+		}
+	],
+	"settings": {}
+}
