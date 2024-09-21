@@ -23,6 +23,7 @@ const Balance = sequelize.define("Balance", {
     }
 });
 
+Product.hasMany(Balance, { foreignKey: "productId" });
 Balance.belongsTo(Product);
 
 module.exports = Balance;

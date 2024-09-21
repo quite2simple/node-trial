@@ -1,8 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../../db");
 
-const Balance = require("../balance/model");
-
 const Product = sequelize.define("Product", {
     id: {
         type: DataTypes.INTEGER,
@@ -17,7 +15,5 @@ const Product = sequelize.define("Product", {
         type: DataTypes.STRING
     }
 });
-
-Product.hasMany(Balance, { foreignKey: "productId" });
 
 module.exports = Product;
