@@ -9,9 +9,6 @@ const Balance = sequelize.define("Balance", {
         primaryKey: true,
         autoIncrement: true
     },
-    productId: {
-        type: DataTypes.INTEGER
-    },
     shopId: {
         type: DataTypes.INTEGER
     },
@@ -23,7 +20,7 @@ const Balance = sequelize.define("Balance", {
     }
 });
 
-Product.hasMany(Balance, { foreignKey: "productId" });
+Product.hasMany(Balance);
 Balance.belongsTo(Product);
 
 module.exports = Balance;
