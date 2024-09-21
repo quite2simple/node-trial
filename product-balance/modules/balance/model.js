@@ -23,6 +23,6 @@ const Balance = sequelize.define("Balance", {
     }
 });
 
-Balance.belongsto(Product);
+Balance.belongsTo(Product);
 
 module.exports = Balance;
