@@ -10,5 +10,18 @@
 			"path": "user-handler"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"sqltools.connections": [
+			{
+				"previewLimit": 50,
+				"server": "localhost",
+				"port": 5432,
+				"askForPassword": true,
+				"driver": "PostgreSQL",
+				"name": "nodetrialconnection",
+				"database": "nodetrialdb1",
+				"username": "nodetrialuser"
+			}
+		]
+	}
 }
