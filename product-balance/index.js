@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/product", productRouter);
-// app.use("/balance", balanceRouter);
+app.use("/balance", balanceRouter);
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}`);
