@@ -1,5 +1,5 @@
 exports.validCreateBalance = (productId, shopId, stored, ordered) => {
-    if (!productId || !shopId || !stored || !ordered) {
+    if (productId === undefined || shopId === undefined || stored === undefined || ordered === undefined) {
         return false;
     }
 
@@ -9,3 +9,15 @@ exports.validCreateBalance = (productId, shopId, stored, ordered) => {
 
     return true;
 };
+
+exports.validBalanceChange = (id, amount, ordered) => {
+    if (id === undefined || amount === undefined || ordered === undefined) {
+        return false;
+    }
+
+    if (typeof id !== "number" || typeof amount !== "number" || typeof ordered !== "boolean") {
+        return false;
+    }
+
+    return true;
+}
