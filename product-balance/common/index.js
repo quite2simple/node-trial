@@ -10,7 +10,7 @@ exports.removeUndefinedFilters = (filters) => {
 };
 
 exports.recordAction = async (productId, shopId, action, stored, ordered) => {
-    const url = 'http://localhost:3000/action';
+    const url = 'http://localhost:5005/action';
 
     const response = await fetch(url, {
         method: 'POST',

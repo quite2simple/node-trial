@@ -1,5 +1,5 @@
 const Product = require("./model");
-const {removeUndefinedFilters} = require("../../common");
+const {removeUndefinedFilters, recordAction} = require("../../common");
 
 exports.getProductsByFilters = async (filters) => {
     filters = removeUndefinedFilters(filters);
@@ -11,9 +11,11 @@ exports.getProductsByFilters = async (filters) => {
 };
 
 exports.createProduct = async (name, plu) => {
-    await Product.create({
+    const product = await Product.create({
         name,
         plu
     });
+
+    await recordAction(product.id, null, "createProduct", null, null);
     console.log(`Product created, plu: ${plu}`);
 };

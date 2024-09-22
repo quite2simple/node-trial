@@ -1,4 +1,5 @@
 const Balance = require("./model");
+const {recordAction} = require("../../common");
 
 exports.getBalanceByFilters = async (filters) => {
 
@@ -6,11 +7,12 @@ exports.getBalanceByFilters = async (filters) => {
 
 exports.createBalance = async (productId, shopId, stored, ordered) => {
     await Balance.create({
-        productId,
+        ProductId: productId,
         shopId,
         stored,
         ordered
     });
+    await recordAction(productId, shopId, "createBalance", stored, ordered);
     console.log(`Balance created for product ${productId}, shop ${shopId}`);
 };
 
@@ -29,6 +31,9 @@ exports.increaseBalance = async (id, amount, ordered) => {
     }
 
     await balance.save();
+
+    console.log(balance.ProductId, balance.shopId, "alterBalance", balance.stored, balance.ordered);
+    await recordAction(balance.ProductId, balance.shopId, "alterBalance", balance.stored, balance.ordered);
 
 };
 
