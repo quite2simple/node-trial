@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
     });
 
     console.log("Entry recorded");
-    res.status(200).send("Entry recorded");
+    res.status(201).send("Entry recorded");
  });
 
 module.exports = router;

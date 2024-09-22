@@ -8,3 +8,27 @@ exports.removeUndefinedFilters = (filters) => {
     }
     return newFilters;
 };
+
+exports.recordAction = async (productId, shopId, action, stored, ordered) => {
+    const url = 'http://localhost:3000/action';
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            productId: productId,
+            shopId: shopId,
+            action: action,
+            stored: stored,
+            ordered: ordered
+        })
+    });
+    if (response.status === 201) {
+        console.log("Action recorded");
+    }
+    else {
+        console.log("Something went wrong, action was not recorded");
+    }
+};
