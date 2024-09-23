@@ -9,6 +9,9 @@ const Action = sequelize.define('Action', {
         autoIncrement: true,
         primaryKey: true
     },
+    plu: {
+        type: Sequelize.STRING
+    },
     productId: {
         type: Sequelize.INTEGER
     },

@@ -1,4 +1,4 @@
-const sequelize = require('./db.js');
+const sequelize = require('./db.js').sequelize;
 const Action = require('./db.js').Action;
 
 sequelize.sync({ force: true }).then(() => {

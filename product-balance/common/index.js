@@ -1,3 +1,4 @@
+const Product = require("../modules/product/model");
 // this is needed bc sequelize will treat undefined as null iirc
 exports.removeUndefinedFilters = (filters) => {
     const newFilters = {};
@@ -10,6 +11,12 @@ exports.removeUndefinedFilters = (filters) => {
 };
 
 exports.recordAction = async (productId, shopId, action, stored, ordered) => {
+    const plu = await Product.findByPk(productId).then(product => {
+        if (!product) {
+            throw new Error(`Product with id ${productId} not found`);
+        }
+        return product.plu
+    });
     const url = 'http://localhost:5005/action';
 
     const response = await fetch(url, {
@@ -18,6 +25,7 @@ exports.recordAction = async (productId, shopId, action, stored, ordered) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            plu: plu,
             productId: productId,
             shopId: shopId,
             action: action,

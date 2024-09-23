@@ -1,5 +1,5 @@
-exports.validCreateAction = (productId, shopId, action, stored, ordered) => {
-    if (productId === undefined || shopId === undefined || action === undefined || stored === undefined || ordered === undefined) {
+exports.validCreateAction = (plu, productId, shopId, action, stored, ordered) => {
+    if (plu === undefined || productId === undefined || shopId === undefined || action === undefined || stored === undefined || ordered === undefined) {
         return false;
     }
 
