@@ -7,12 +7,12 @@ const {validCreateAction} = require('./validation.js');
 
 router.get('/', async (req, res) => {
     let {shopId, plu, from, to, action} = req.query;
-    try {
-        shopId = parseInt(shopId);
-        from = Date.parse(from);
-        to = Date.parse(to);
-    }
-    catch (e) {
+
+    shopId = parseInt(shopId);
+    from = Date.parse(from);
+    to = Date.parse(to);
+
+    if (isNaN(shopId) || isNaN(from) || isNaN(to)) {
         res.status(400).send("Invalid data");
         return;
     }
