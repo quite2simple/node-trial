@@ -32,7 +32,7 @@ exports.increaseBalance = async (id, amount, ordered) => {
 
     await balance.save();
 
-    console.log(balance.ProductId, balance.shopId, "alterBalance", balance.stored, balance.ordered);
+    // console.log(balance.ProductId, balance.shopId, "alterBalance", balance.stored, balance.ordered);
     await recordAction(balance.ProductId, balance.shopId, "alterBalance", balance.stored, balance.ordered);
 
 };
