@@ -1,3 +1,17 @@
+exports.validFilters = (filters) => {
+    if (!filters) {
+        return false;
+    }
+
+    const {plu, shopId, from, to} = filters;
+
+    if (plu === undefined || isNaN(shopId || isNaN(from) || isNaN(to))) {
+        return false;
+    }
+
+    return true;
+};
+
 exports.validCreateBalance = (productId, shopId, stored, ordered) => {
     if (productId === undefined || shopId === undefined || stored === undefined || ordered === undefined) {
         return false;

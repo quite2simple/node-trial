@@ -1,7 +1,22 @@
 const Balance = require("./model");
+const Product = require("../product/model");
 const {recordAction} = require("../../common");
+const {getActions} = require("../../common");
 
 exports.getBalanceByFilters = async (filters) => {
+    const {plu, shopId, from, to} = filters;
+
+    const product = await Product.findOne({
+        where: {
+            plu: plu
+        }
+    });
+    const balance = await Balance.findOne({
+        where: {
+            ProductId: product.id,
+            shopId: shopId
+        }
+    });
 
 };
 
