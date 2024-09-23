@@ -42,23 +42,17 @@ exports.recordAction = async (productId, shopId, action, stored, ordered) => {
 };
 
 exports.getActions = async(shopId, plu, from, to, action) => {
-    const url = 'http://localhost:5005/action';
+    const url = `http://localhost:5005/action?plu=${plu}&shopId=${shopId}&from=${from}&to=${to}&action=${action}`;
 
     const response = await fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            shopId: shopId,
-            plu: plu,
-            from: from,
-            to: to,
-            action: action
-        })
+        }
     });
     if (response.status === 200) {
         console.log("Actions retrieved");
+        return await response.json();
     }
     else {
         console.log("Something went wrong");

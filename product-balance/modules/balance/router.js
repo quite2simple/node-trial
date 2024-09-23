@@ -1,11 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const {validCreateBalance, validBalanceChange} = require("./validation");
-const {createBalance, increaseBalance, decreaseBalance} = require("./controller");
+const {validCreateBalance, validBalanceChange, validFilters} = require("./validation");
+const {createBalance, increaseBalance, decreaseBalance, getBalanceByFilters} = require("./controller");
 
 // get balances by filters
-router.get("/", (req, res) => {
-
+router.get("/", async (req, res) => {
+    const filters = req.query;
+    console.log(filters);
+    filters.shopId = parseInt(filters.shopId);
+    filters.from = Date.parse(filters.from);
+    filters.to = Date.parse(filters.to);
+    if (!validFilters(filters)) {
+        res.status(400).send({error: "Bad filters"});
+        return;
+    }
+    const data = await getBalanceByFilters(filters);
+    res.status(200).send(data);
 });
 
 // create a new balance

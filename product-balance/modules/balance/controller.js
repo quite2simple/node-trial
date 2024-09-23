@@ -18,6 +18,24 @@ exports.getBalanceByFilters = async (filters) => {
         }
     });
 
+    const history = await getActions(shopId, plu, from, to);
+
+    if (!history) {
+        console.log("No history");
+        return {};
+    }
+
+    const res = {
+        plu: plu,
+        shopId: shopId,
+        history: history.map(action => ({
+            stored: action.stored,
+            ordered: action.ordered
+        }))
+    };
+
+    return res;
+
 };
 
 exports.createBalance = async (productId, shopId, stored, ordered) => {

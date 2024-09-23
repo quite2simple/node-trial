@@ -5,7 +5,7 @@ exports.validFilters = (filters) => {
 
     const {plu, shopId, from, to} = filters;
 
-    if (plu === undefined || isNaN(shopId || isNaN(from) || isNaN(to))) {
+    if (plu === undefined || isNaN(shopId) || isNaN(from) || isNaN(to)) {
         return false;
     }
 
