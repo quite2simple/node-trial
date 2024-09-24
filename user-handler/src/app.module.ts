@@ -3,25 +3,36 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './user/user.model';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     UserModule,
-    ConfigModule.forRoot(),
-    SequelizeModule.forRoot({
-      dialect: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'nodetrialuser',
-      password: process.env.DB_PASSWORD,
-      models: [User],
+    SequelizeModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        dialect: 'postgres',
+        host: 'localhost',
+        port: 5432,
+        username: 'nodetrialuser',
+        // Nest kept complaining that password has to be a string, 
+        // I tried to load it from .env correctly but had to give up
+        password: 'grandnodetrial',
+        database: 'nodetrialdb2',
+        autoLoadModels: true,
+        synchronize: true,
+      }),
+      inject: [ConfigService],
     }),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
-  constructor(private configService: ConfigModule) {}
+  constructor(private configService: ConfigService) {}
 }
