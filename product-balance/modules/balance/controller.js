@@ -26,11 +26,14 @@ exports.getBalanceByFilters = async (filters) => {
     }
 
     const res = {
+        id: balance.id,
         plu: plu,
         shopId: shopId,
         history: history.map(action => ({
             stored: action.stored,
-            ordered: action.ordered
+            ordered: action.ordered,
+            action: action.action,
+            timestamp: action.timestamp
         }))
     };
 
