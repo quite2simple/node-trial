@@ -26,6 +26,7 @@ import { User } from './user/user.model';
         database: 'nodetrialdb2',
         autoLoadModels: true,
         synchronize: true,
+        logging: false,
       }),
       inject: [ConfigService],
     }),

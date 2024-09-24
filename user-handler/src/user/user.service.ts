@@ -45,6 +45,20 @@ export class UserService {
     await this.user.destroy({ truncate: true });
   }
 
+  async problemMen() {
+    await this.user.update({ problems: true }, { where: { sex: 'male' } });
+  }
+
+  async problemWomen() {
+    await this.user.update({ problems: true }, { where: { sex: 'female' } });
+  }
+
+  async resolveProblems() {
+    const problemCount = await this.user.count({ where: { problems: true } });
+    await this.user.update({ problems: false }, { where: { problems: true } });
+    return problemCount;
+  }
+
   randomUser(): RandomUserData {
     return {
       firstName: faker.person.firstName(),
