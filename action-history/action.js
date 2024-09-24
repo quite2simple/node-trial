@@ -6,14 +6,23 @@ const Action = require('./db.js').Action;
 const {validCreateAction} = require('./validation.js');
 
 router.get('/', async (req, res) => {
-    let {shopId, plu, from, to, action} = req.query;
+    let {shopId, plu, from, to, action, pageSize, page} = req.query;
 
 
     shopId = parseInt(shopId);
-    from = parseInt(from);
-    to = parseInt(to);
+    from = Date.parse(from);
+    to = Date.parse(to);
+    pageSize = parseInt(pageSize);
+    page = parseInt(page);
 
-    console.log(shopId, plu, from, to, action);
+    if (isNaN(pageSize)) {
+        pageSize = 5;
+    }
+    if (isNaN(page)) {
+        page = 1;
+    }
+
+    console.log(shopId, plu, from, to, action, pageSize, page);
 
 
     if (isNaN(shopId) || isNaN(from) || isNaN(to) || plu === undefined) {
@@ -29,17 +38,23 @@ router.get('/', async (req, res) => {
             [Op.between]: [from, to]
         },
     }
-    if (action !== 'undefined') {
+    if (action !== 'undefined' && action !== undefined) {
         filters.action = action;
     }
 
     console.log("filters", filters);
 
     const actions = await Action.findAll({
-        where: filters
+        where: filters,
+        limit: pageSize,
+        offset: pageSize * (page - 1),
     });
-    console.log(actions);
-    res.status(200).send(actions);
+    // console.log(actions);
+    res.status(200).send({
+        pageSize: pageSize,
+        page: page,
+        actions: actions
+    });
 
     
 

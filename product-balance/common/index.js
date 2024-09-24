@@ -42,7 +42,7 @@ exports.recordAction = async (productId, shopId, action, stored, ordered) => {
 };
 
 exports.getActions = async(shopId, plu, from, to, action) => {
-    const url = `http://localhost:5005/action?plu=${plu}&shopId=${shopId}&from=${from}&to=${to}&action=${action}`;
+    const url = `http://localhost:5005/action?plu=${plu}&shopId=${shopId}&from=${new Date(from).toISOString()}&to=${new Date(to).toISOString()}&action=${action}&pageSize=100`;
 
     const response = await fetch(url, {
         method: 'GET',

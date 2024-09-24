@@ -29,7 +29,7 @@ exports.getBalanceByFilters = async (filters) => {
         id: balance.id,
         plu: plu,
         shopId: shopId,
-        history: history.map(action => ({
+        history: history.actions.map(action => ({
             stored: action.stored,
             ordered: action.ordered,
             action: action.action,
