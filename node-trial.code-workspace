@@ -22,6 +22,7 @@
 				"database": "nodetrialdb1",
 				"username": "nodetrialuser"
 			}
-		]
+		],
+		"typescript.tsdk": "user-handler\\node_modules\\typescript\\lib"
 	}
 }
